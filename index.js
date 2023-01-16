@@ -1,8 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import * as dotenv from 'dotenv'
+import morgan from 'morgan'
 
+dotenv.config()
 const app = express()
-const port = 3000
+
+app.use(morgan('tiny'))
 
 app.get('/', (req, res) => {
     res.status(200).send('Bienvenido al API de debeTu')
@@ -10,7 +14,7 @@ app.get('/', (req, res) => {
 
 async function main(){
     mongoose.set('strictQuery', true)
-    await mongoose.connect('mongodb://127.0.0.1:27018/debetu');
+    await mongoose.connect(process.env.URL_DB);
     await app.listen(process.env.SERVER_PORT)
     console.log('Servidor y base de datos encencidos')
 }
