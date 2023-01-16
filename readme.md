@@ -8,6 +8,9 @@
 - dotenv: variables de entorno
 - morgan: logger
 
+npm i -g nodemon
+10.101.11.30
+
 ## Base de datos
 
 Usamos el puerto 27018 para que no entre en conflicto con el mongo que tenemos instalado en local
