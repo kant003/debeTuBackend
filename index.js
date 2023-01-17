@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import morgan from 'morgan'
-import * as messageController from './controllers/messageController.js'
+import messageRouter from './routers/messageRouter.js'
 dotenv.config()
 const app = express()
 app.use(express.urlencoded({extended: false}))
@@ -15,13 +15,7 @@ app.get('/', (req, res) => {
     res.status(200).send('Bienvenido al API de debeTu')
 }) 
 
-// listar todos los mensajes
-app.get('/message/', messageController.findAll)
-
-// añadir un nuevo mensaje
-app.post('/message/', messageController.save)
-
-
+app.use('/message', messageRouter)
 
 async function main(){
     mongoose.set('strictQuery', true)
