@@ -2,8 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import morgan from 'morgan'
-import { Message } from './models/message.js'
-
+import * as messageController from './controllers/messageController.js'
 dotenv.config()
 const app = express()
 app.use(express.urlencoded({extended: false}))
@@ -17,26 +16,10 @@ app.get('/', (req, res) => {
 }) 
 
 // listar todos los mensajes
-app.get('/message/list', async (req, res) => {
-    try{
-        const messages = await Message.find()
-        res.status(200).json(messages)
-    }catch(err){
-        res.status(500).json({message: 'error al obtener los mensajes'+err})
-    }
-})
+app.get('/message/list', messageController.findAll)
 
 // añadir un nuevo mensaje
-app.post('/message/add', async (req, res) =>{
-    try{
-        const data = req.body
-        const newMessage = new Message(data)
-        const messageSave = await newMessage.save()
-        res.status(200).json(messageSave)
-    }catch(err){
-        res.status(500).json({message: 'error al crear el nuevo mensaje.'+err})
-    }
-})
+app.post('/message/add', messageController.save)
 
 
 
