@@ -16,11 +16,10 @@ app.get('/', (req, res) => {
 }) 
 
 // listar todos los mensajes
-app.get('/message/list', messageController.findAll)
+app.get('/message/', messageController.findAll)
 
 // añadir un nuevo mensaje
-app.post('/message/add', messageController.save)
-
+app.post('/message/', messageController.save)
 
 
 
