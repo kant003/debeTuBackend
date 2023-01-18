@@ -3,10 +3,13 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import morgan from 'morgan'
 import messageRouter from './routers/messageRouter.js'
+import cors from 'cors'
 dotenv.config()
 const app = express()
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
+app.use(cors())
 
 
 app.use(morgan('tiny'))
