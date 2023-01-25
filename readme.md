@@ -8,6 +8,7 @@
 - dotenv: variables de entorno
 - morgan: logger
 - bcrypt: encriptar/desencripta contraseñas
+- jsonwebtoken- generar token de autenticacion
 
 npm i -g nodemon
 10.101.11.30

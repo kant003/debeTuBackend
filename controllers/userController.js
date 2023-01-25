@@ -7,6 +7,7 @@ const findAll = async (req, res) =>{
     }catch(err){
         res.status(500).json({message: 'error al obtener los usuarios:'+err})
     }
+    
 }
 
 const findById = async (req, res) =>{

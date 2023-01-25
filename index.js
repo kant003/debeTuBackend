@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import morgan from 'morgan'
 import messageRouter from './routers/messageRouter.js'
 import userRouter from './routers/userRouter.js'
+import authRouter from './routers/authRouter.js'
 import cors from 'cors'
 dotenv.config()
 const app = express()
@@ -21,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.use('/message', messageRouter)
 app.use('/user', userRouter)
+app.use('/auth', authRouter)
 
 async function main(){
     mongoose.set('strictQuery', true)
