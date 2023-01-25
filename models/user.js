@@ -1,6 +1,18 @@
 import { model, Schema } from "mongoose";
 import bcrypt from 'bcrypt'
 
+let ruleSchema = new Schema(
+  {
+    _id: { type: Schema.ObjectId, auto: true },
+    text: String,
+    // idUser: {type: Schema.ObjectId, ref:'User'}
+  },
+  {
+    timestamps: true, // createdAt updatedAt
+    versionKey: false, // _V
+  }
+)
+
 let userSchema = new Schema(
   {
     _id: { type: Schema.ObjectId, auto: true },
@@ -10,10 +22,10 @@ let userSchema = new Schema(
       required: true,
       trim: true,
       lowercase: true,
-      index: true,
       unique: true,
     },
     password: {type:String, required: true, trim: true, select: false, minLength: 4}, //TODO
+    rules: [ruleSchema]
   },
   {
     timestamps: true, // createdAt updatedAt
