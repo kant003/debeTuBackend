@@ -2,6 +2,8 @@ import * as usersServices  from '../services/usersServices.js'
 
 const findAll = async (req, res) =>{
     try{
+        //console.log('hola')
+        //const userLogger = req.user
         const users = await usersServices.findAll()
         res.status(200).json(users)
     }catch(err){
