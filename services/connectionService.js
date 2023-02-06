@@ -1,4 +1,5 @@
-import { Connection } from "mongoose"
+import { Connection } from "../models/connection.js";
+
 
 
 const connectToCreditor = async(userIdCreditor, userIdDeptor)=>{

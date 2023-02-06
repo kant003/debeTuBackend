@@ -5,12 +5,11 @@ import * as connectionController from '../controllers/connectionController.js'
 const connectionRouter = Router()
 connectionRouter.post('/connectToCreditor/:email',
     passport.authenticate('jwt', {session:false}), 
-    connectionController.connectoToCreditor)
+    connectionController.connectToCreditor)
 
 connectionRouter.patch('/disconnectToCreditor/:email',
     passport.authenticate('jwt', {session:false}), 
     connectionController.disconnectToCreditor)
-
 
 
 

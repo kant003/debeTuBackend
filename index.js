@@ -5,6 +5,7 @@ import morgan from 'morgan'
 import messageRouter from './routers/messageRouter.js'
 import userRouter from './routers/userRouter.js'
 import authRouter from './routers/authRouter.js'
+import connectionRouter from './routers/connectionRouter.js'
 import cors from 'cors'
 import passport from 'passport'
 import passportMiddleware from './middlewares/passport.js'
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 app.use('/message', messageRouter)
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
+app.use('/connection', connectionRouter)
 
 async function main(){
     mongoose.set('strictQuery', true)

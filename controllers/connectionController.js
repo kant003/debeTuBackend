@@ -1,20 +1,24 @@
 import * as usersServices  from '../services/usersServices.js'
-import * as connectionServices  from '../services/connectionServices.js'
+import * as connectionServices  from '../services/connectionService.js'
 
 const connectToCreditor = async (req, res) =>{
     try{
         const userCreditorEmail = req.params.email
         const userLoggedDeptor = req.user
 
-        const userCreditor = usersServices.findByEmail(userCreditorEmail)
-        if(!userCreditor)
-            req.status(404).json({message: 'No existe el usuario acredor'})
+        const userCreditor = await usersServices.findByEmail(userCreditorEmail)
+        if(!userCreditor){
+            res.status(404).json({message: 'No existe el usuario acredor'})
+            return
+        }
     
         const connection = 
             await connectionServices.getConnectionFromUsersIds( 
                 userCreditor._id, userLoggedDeptor._id)
-        if(connection)
-                res.status(409).json({message: 'Error, los usuarios ya están conectados'})
+        if(connection){
+            res.status(409).json({message: 'Error, los usuarios ya están conectados'})
+            return
+        }
             
 
         const newConnection = await connectionServices.connectToCreditor(

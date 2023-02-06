@@ -25,5 +25,5 @@ let connectionSchema = new Schema(
     versionKey: false,
   }
 );
-const Conection = model("Connection", connectionSchema);
-export {Conection}
+const Connection = model("Connection", connectionSchema);
+export {Connection}
