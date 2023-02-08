@@ -14,8 +14,13 @@ const disconnectToCreditor = async(idConnection)=>
     await Connection.findByIdAndUpdate(idConnection, {active:false})
 
 const getConnectionFromUsersIds= async(userIdCreditor, userIdDeptor) => 
-    await Connection.findOne(
+    await Connection.find(
         {deptor: userIdDeptor, creditor:userIdCreditor}
     )
 
-export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds}
+const getDebtorsByIdCreditor = async (myIdUserLogged) => await Connection.find({ creditor: myIdUserLogged }).populate('debtor').populate('debts')
+
+const getCreditorsByIdDebtor = async (myIdUserLogged) => await Connection.find({ debtor: myIdUserLogged }).populate('creditor').populate('debts')
+
+
+export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor}

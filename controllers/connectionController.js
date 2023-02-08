@@ -12,13 +12,14 @@ const connectToCreditor = async (req, res) =>{
             return
         }
     
-        const connection = 
+        //TODO: arreglar este fallo
+        /*const connection = 
             await connectionServices.getConnectionFromUsersIds( 
                 userCreditor._id, userLoggedDeptor._id)
         if(connection){
             res.status(409).json({message: 'Error, los usuarios ya están conectados'})
             return
-        }
+        }*/
             
 
         const newConnection = await connectionServices.connectToCreditor(
@@ -53,4 +54,27 @@ const disconnectToCreditor = async (req, res) =>{
 }
 
 
-export { connectToCreditor, disconnectToCreditor }
+
+async function getMyDebtors(req, res) {
+    try {
+      const userLoguedId = req.user._id // Usuario acreedor (loguado en el sistema)
+      const debts = await connectionServices.getDebtorsByIdCreditor(userLoguedId)
+      res.status(200).json(debts)
+    } catch (err) {
+      res.status(500).json({mensaje: 'error al obtener todos mis deudores:' + err})
+    }
+  }
+  
+  async function getMyCreditors(req, res) {
+    try {
+      const userLoguedId = req.user._id // Usuario deudor (loguado en el sistema)
+      const creditors = await connectionServices.getCreditorsByIdDebtor(userLoguedId)
+      res.status(200).json(creditors)
+    } catch (err) {
+        res.status(500).json({mensaje: 'error al obtener todos mis acreedores:' + err})
+    }
+  }
+  
+
+
+export { connectToCreditor, disconnectToCreditor, getMyDebtors, getMyCreditors }

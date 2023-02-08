@@ -12,5 +12,12 @@ connectionRouter.patch('/disconnectToCreditor/:email',
     connectionController.disconnectToCreditor)
 
 
+connectionRouter.get('/getMyDebtors/', 
+    passport.authenticate("jwt", { session: false }), 
+    connectionController.getMyDebtors)
+
+connectionRouter.get('/getMyCreditors/', 
+    passport.authenticate("jwt", { session: false }), 
+    connectionController.getMyCreditors)
 
 export default connectionRouter
