@@ -75,6 +75,15 @@ async function getMyDebtors(req, res) {
     }
   }
   
+async function addDebt(req, res) {
+    const debtData = req.body
+    const idConnection = req.params.idConnection
+    try {
+        const debtSave = await connectionServices.addDebt(idConnection, debtData)
+        res.status(200).json(debtSave)
+    } catch (err) {
+        res.status(500).json({mensaje: 'error al obtener guardar la deuda:' + err})
+    }
+}
 
-
-export { connectToCreditor, disconnectToCreditor, getMyDebtors, getMyCreditors }
+export { connectToCreditor, disconnectToCreditor, getMyDebtors, getMyCreditors, addDebt }

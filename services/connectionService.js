@@ -22,5 +22,10 @@ const getDebtorsByIdCreditor = async (myIdUserLogged) => await Connection.find({
 
 const getCreditorsByIdDebtor = async (myIdUserLogged) => await Connection.find({ debtor: myIdUserLogged }).populate('creditor').populate('debts')
 
+const addDebt = async (idConnection, debtData) =>{
+    const connection = await Connection.findById(idConnection)
+    connection.debts.push(debtData)
+    return await connection.save()
+}
 
-export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor}
+export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor, addDebt}
