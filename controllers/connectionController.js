@@ -86,4 +86,16 @@ async function addDebt(req, res) {
     }
 }
 
-export { connectToCreditor, disconnectToCreditor, getMyDebtors, getMyCreditors, addDebt }
+async function removeDebt(req, res) {
+    //const idDebt = req.body
+    const idConnection = req.params.idConnection
+    const idDebt = req.params.idDebt
+    try {
+        const debtRemoved = await connectionServices.removeDebt(idConnection, idDebt)
+        res.status(200).json(debtRemoved)
+    } catch (err) {
+        res.status(500).json({mensaje: 'error al obtener borrar la deuda:' + err})
+    }
+}
+
+export { connectToCreditor, disconnectToCreditor, getMyDebtors, getMyCreditors, addDebt, removeDebt }

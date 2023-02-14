@@ -20,8 +20,13 @@ connectionRouter.get('/getMyCreditors/',
     passport.authenticate("jwt", { session: false }), 
     connectionController.getMyCreditors)
 
-    connectionRouter.post('/addDebt/:idConnection',
+connectionRouter.post('/addDebt/:idConnection',
     passport.authenticate("jwt", { session: false }),
     connectionController.addDebt )
+
+connectionRouter.delete('/removeDebt/:idConnection/:idDebt',
+    passport.authenticate("jwt", { session: false }),
+    connectionController.removeDebt )
+
 
 export default connectionRouter
